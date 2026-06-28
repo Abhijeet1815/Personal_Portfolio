@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhijeet Sharma | Ferb, I Know What We're Gonna Code Today</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --orange: #FF6B35;
+      --orange-light: #ff8c5a;
+      --teal: #00B4CC;
+      --dark-teal: #007A8A;
+      --sky: #87CEEB;
+      --sky-dark: #5BA0C8;
+      --danville: #4a9e50;
+      --navy: #0d1b2a;
+      --navy2: #1a2d40;
+      --cream: #FFF9F0;
+      --yellow: #FFD700;
+      --green: #4a9e50;
+      --purple: #7B2D8B;
+      --white: #ffffff;
+      --text: #1a2d40;
+      --text-muted: #5a6a7a;
+      --border: #e2e8f0;
+      --card: #ffffff;
+      --section-alt: #f0f7fb;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1a2d40;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--orange);
+      border-radius: 3px;
+    }
+
+    /* NAV */
+    #navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(135, 206, 235, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--orange);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Fredoka One', cursive;
+    }
+
+    .nav-logo-img {
+      position: relative;
+      width: 160px;
+      height: 42px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    /* The P&F logo image with "Code with" overlay replacing "Disney" */
+    .nav-logo-img img {
+      height: 100%;
+      width: auto;
+      position: relative;
+    }
+
+    .nav-logo-brand {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      color: var(--navy);
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    /* Logo: "Code with" in Dancing Script (mimics Disney cursive) then P&F block text */
+    .logo-codewith {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.05rem;
+      color: #e8005a;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .logo-pnf {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      color: #e83a00;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .logo-and {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.6rem;
+      color: #e83a00;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--orange);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* HERO — Danville city as background */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding-top: 64px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-city-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('/Users/abhijeetsharma/Desktop/Personal_Portfolio/City.jpeg');
+      background-size: cover;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+
+    /* Sky gradient over the top */
+    .hero-sky-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+          rgba(135, 206, 235, 0.45) 0%,
+          rgba(135, 206, 235, 0.1) 40%,
+          rgba(255, 255, 255, 0) 70%,
+          rgba(255, 249, 240, 0.6) 100%);
+    }
+
+    /* Content panel floats above the city */
+    .hero-panel {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      padding: 0 3rem 3rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      min-height: calc(100vh - 64px);
+    }
+
+    .hero-left {
+      flex: 1;
+      background: rgba(255, 249, 240, 0.92);
+      backdrop-filter: blur(8px);
+      border-radius: 24px;
+      border: 2px solid rgba(255, 107, 53, 0.3);
+      padding: 2.5rem;
+      max-width: 560px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      align-self: center;
+      margin-top: 2rem;
+    }
+
+    .hero-top-label {
+      font-family: 'Fredoka One', cursive;
+      color: var(--teal);
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--orange);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .hero-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title .orange {
+      color: var(--orange);
+    }
+
+    .hero-sub {
+      font-size: 0.97rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Characters on the right — Phineas & Ferb backyard scene */
+    .hero-right {
+      flex-shrink: 0;
+      width: 420px;
+      align-self: flex-end;
+      position: relative;
+    }
+
+    .hero-chars {
+      width: 100%;
+      filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.2));
+      animation: heroFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes heroFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    /* Ferb I know... banner at very top */
+    .ferb-banner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--orange);
+      color: #fff;
+      text-align: center;
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.88rem;
+      letter-spacing: 0.1em;
+      padding: 0.4rem 1rem;
+      z-index: 1001;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.7rem;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.92rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--dark-teal);
+      border: 2px solid var(--teal);
+    }
+
+    .btn-ghost:hover {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .s-label {
+      font-family: 'Fredoka One', cursive;
+      color: var(--orange);
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .s-label::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: var(--orange);
+    }
+
+    .s-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+
+    .s-title em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    .s-title .dot {
+      color: var(--teal);
+    }
+
+    .s-desc {
+      color: var(--text-muted);
+      font-size: 0.97rem;
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--sky);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-scene-wrap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      opacity: 0.15;
+      background-image: url('/Users/abhijeetsharma/Desktop/Personal_Portfolio/City.jpeg');
+      background-size: cover;
+      background-position: center top;
+      pointer-events: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 3.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-img-panel {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      border: 3px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .about-img-panel img {
+      width: 100%;
+      display: block;
+    }
+
+    .about-text h2 {
+      margin-bottom: 1rem;
+      color: var(--navy);
+    }
+
+    .about-text p {
+      color: #1a3a5c;
+      line-height: 1.8;
+      margin-bottom: 0.9rem;
+      font-size: 0.96rem;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 1.4rem 0 1.8rem;
+    }
+
+    .tag {
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      border: 1.5px solid;
+    }
+
+    .tag-o {
+      border-color: var(--orange);
+      color: var(--orange);
+      background: rgba(255, 107, 53, 0.08);
+    }
+
+    .tag-t {
+      border-color: var(--dark-teal);
+      color: var(--dark-teal);
+      background: rgba(0, 122, 138, 0.08);
+    }
+
+    .tag-g {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(74, 158, 80, 0.08);
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.8rem;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 14px;
+      padding: 1rem;
+      text-align: center;
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      transition: border-color 0.2s, transform 0.2s;
+      backdrop-filter: blur(4px);
+    }
+
+    .stat-box:hover {
+      border-color: var(--orange);
+      transform: translateY(-3px);
+    }
+
+    .stat-num {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      color: var(--orange);
+    }
+
+    .stat-lbl {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 800;
+      margin-top: 0.2rem;
+    }
+
+    /* PROJECTS */
+    #projects {
+      background: var(--cream);
+    }
+
+    .proj-section-flex {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+
+    .proj-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 2rem;
+    }
+
+    .proj-evil-panel {
+      flex-shrink: 0;
+      width: 230px;
+      position: sticky;
+      top: 90px;
+      align-self: flex-start;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .proj-evil-bubble {
+      position: relative;
+      background: #fff;
+      border: 2.5px solid #7B2D8B;
+      border-radius: 22px;
+      padding: 0.7rem 1.1rem;
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.95rem;
+      color: #7B2D8B;
+      text-align: center;
+      line-height: 1.35;
+      box-shadow: 0 4px 18px rgba(123, 45, 139, 0.13);
+      margin-bottom: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .proj-evil-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-top: 16px solid #7B2D8B;
+    }
+
+    .proj-evil-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 14px solid #fff;
+      z-index: 1;
+    }
+
+    .proj-evil-img {
+      width: 100%;
+      border-radius: 18px;
+      margin-top: 20px;
+      filter: drop-shadow(0 8px 24px rgba(123, 45, 139, 0.18));
+      display: block;
+    }
+
+    .proj-card {
+      background: var(--white);
+      border-radius: 22px;
+      border: 1.5px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+
+    .proj-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.1);
+      border-color: var(--orange);
+    }
+
+    .proj-top-banner {
+      height: 70px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .proj-logo-inline {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .proj-name-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .banner-chess {
+      background: linear-gradient(90deg, #7B3F00, #4a2500);
+    }
+
+    .banner-ml {
+      background: linear-gradient(90deg, #7B2D8B, #4a1466);
+    }
+
+    .proj-header {
+      padding: 1.8rem 2rem 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .proj-type {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+    }
+
+    .pt-chess {
+      background: rgba(123, 45, 139, 0.1);
+      color: #7B2D8B;
+    }
+
+    .pt-ml {
+      background: rgba(0, 180, 204, 0.1);
+      color: var(--dark-teal);
+    }
+
+    .proj-links {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .proj-links a {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--section-alt);
+      border: 1.5px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .proj-links a:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .proj-body {
+      padding: 1.2rem 2rem 2rem;
+    }
+
+    .proj-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.65rem;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+
+    .proj-tagline {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 1.1rem;
+    }
+
+    .proj-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .proj-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.89rem;
+      line-height: 1.5;
+    }
+
+    .proj-bullets li::before {
+      content: '⚙';
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .chip {
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      background: var(--section-alt);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    /* SKILLS */
+    #skills {
+      background: var(--white);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .skill-cat {
+      background: var(--section-alt);
+      border-radius: 18px;
+      padding: 1.5rem;
+      border: 1.5px solid var(--border);
+      transition: border-color 0.2s;
+    }
+
+    .skill-cat:hover {
+      border-color: var(--teal);
+    }
+
+    .sc-head {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .sc-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--orange), var(--teal));
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+    }
+
+    .sc-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      color: var(--navy);
+    }
+
+    .sc-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .sc-chip {
+      padding: 0.3rem 0.72rem;
+      border-radius: 8px;
+      font-size: 0.77rem;
+      font-weight: 700;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      transition: all 0.18s;
+      cursor: default;
+    }
+
+    .sc-chip:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      transform: translateY(-1px);
+    }
+
+    /* CODING PROFILES */
+    #coding {
+      background: var(--section-alt);
+    }
+
+    .coding-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .coding-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .coding-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    }
+
+    .coding-top-stripe {
+      height: 5px;
+    }
+
+    .stripe-cf {
+      background: linear-gradient(90deg, #1a90ff, #0d5cc7);
+    }
+
+    .stripe-cc {
+      background: linear-gradient(90deg, #FFD700, #e5b800);
+    }
+
+    .stripe-lc {
+      background: linear-gradient(90deg, #f87c1a, #d46010);
+    }
+
+    .stripe-gh {
+      background: linear-gradient(90deg, #333, #111);
+    }
+
+    .coding-body {
+      padding: 1.4rem;
+    }
+
+    .coding-profile-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .coding-handle {
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--navy);
+    }
+
+    .coding-rank {
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-top: 0.1rem;
+    }
+
+    .rank-cf {
+      color: #1a90ff;
+    }
+
+    .rank-cc {
+      color: #e5b800;
+    }
+
+    .rank-lc {
+      color: #f87c1a;
+    }
+
+    .rank-gh {
+      color: var(--green);
+    }
+
+    .prog-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .prog-bar {
+      height: 7px;
+      border-radius: 4px;
+      background: var(--section-alt);
+      margin-bottom: 0.25rem;
+      overflow: hidden;
+    }
+
+    .prog-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    .fill-cf {
+      background: linear-gradient(90deg, #1a90ff, #0d5cc7);
+    }
+
+    .fill-cc {
+      background: linear-gradient(90deg, #FFD700, #e5b800);
+    }
+
+    .fill-lc {
+      background: linear-gradient(90deg, #f87c1a, #d46010);
+    }
+
+    .fill-gh {
+      background: linear-gradient(90deg, var(--green), #2d7a33);
+    }
+
+    .prog-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-align: right;
+      margin-bottom: 0.9rem;
+    }
+
+    .coding-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .cs-lbl {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 0.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .cs-lbl::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .cs-val {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.15rem;
+      color: var(--navy);
+    }
+
+    .coding-btn {
+      display: block;
+      text-align: center;
+      padding: 0.65rem;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.83rem;
+      color: #fff;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .coding-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .cbtn-cf {
+      background: linear-gradient(90deg, #1a90ff, #0d5cc7);
+    }
+
+    .cbtn-cc {
+      background: linear-gradient(90deg, #FFD700, #e5b800);
+      color: #333;
+    }
+
+    .cbtn-lc {
+      background: linear-gradient(90deg, #f87c1a, #d46010);
+    }
+
+    .cbtn-gh {
+      background: linear-gradient(90deg, #333, #111);
+    }
+
+    /* ACHIEVEMENTS */
+    #achievements {
+      background: var(--white);
+    }
+
+    .ach-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .ach-card {
+      background: var(--section-alt);
+      border-radius: 16px;
+      padding: 1.4rem 1.8rem;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 1.4rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .ach-card:hover {
+      border-color: var(--orange);
+      transform: translateX(5px);
+    }
+
+    .ach-icon {
+      font-size: 2.1rem;
+      flex-shrink: 0;
+    }
+
+    .ach-content h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+
+    .ach-content p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .ach-content a {
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* EDUCATION */
+    #education {
+      background: var(--section-alt);
+    }
+
+    .edu-card {
+      background: var(--white);
+      border-radius: 22px;
+      border: 1.5px solid var(--border);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .edu-left {
+      padding: 2.4rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .edu-institute {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.45rem;
+      color: var(--navy);
+      margin-bottom: 0.35rem;
+    }
+
+    .edu-degree {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 1.1rem;
+    }
+
+    .edu-meta {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .edu-meta-item span {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .edu-meta-item strong {
+      display: block;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.55rem;
+      color: var(--orange);
+    }
+
+    .edu-right {
+      padding: 2.4rem;
+    }
+
+    .edu-right h4 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.98rem;
+      color: var(--navy);
+      margin-bottom: 1.1rem;
+    }
+
+    .subject-item {
+      margin-bottom: 0.9rem;
+    }
+
+    .subject-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+      font-size: 0.83rem;
+      font-weight: 700;
+    }
+
+    .subject-bar {
+      height: 5px;
+      background: var(--section-alt);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .subject-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--teal));
+    }
+
+    /* POR */
+    #por {
+      background: var(--white);
+    }
+
+    .por-card {
+      background: var(--section-alt);
+      border-radius: 20px;
+      padding: 2rem 2.4rem;
+      border: 1.5px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .por-card:hover {
+      border-color: var(--teal);
+    }
+
+    .por-role {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+
+    .por-org {
+      font-size: 0.86rem;
+      color: var(--dark-teal);
+      font-weight: 800;
+      margin-bottom: 0.2rem;
+    }
+
+    .por-date {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .por-right h4 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.98rem;
+      color: var(--navy);
+      margin-bottom: 0.9rem;
+    }
+
+    .por-right ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .por-right li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .por-right li::before {
+      content: '→';
+      color: var(--orange);
+      flex-shrink: 0;
+      font-weight: 900;
+    }
+
+    /* CERTIFICATES */
+    #certs {
+      background: var(--section-alt);
+    }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.1rem;
+    }
+
+    .cert-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 1.4rem;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .cert-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-3px);
+    }
+
+    .cert-icon {
+      font-size: 1.9rem;
+      flex-shrink: 0;
+    }
+
+    .cert-info a {
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: var(--navy);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .cert-info a:hover {
+      color: var(--teal);
+    }
+
+    .cert-meta {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    /* CONTACT */
+    #contact {
+      position: relative;
+      overflow: hidden;
+      background-image: url('/Users/abhijeetsharma/Desktop/Personal_Portfolio/P&F.jpeg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .contact-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(135, 206, 235, 0.88);
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    #contact .s-title {
+      color: var(--navy);
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .cl {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      border: 1.5px solid;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .cl:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .cl-email {
+      background: var(--orange);
+      color: #fff;
+      border-color: var(--orange-light);
+    }
+
+    .cl-gh {
+      background: #24292e;
+      color: #fff;
+      border-color: #444;
+    }
+
+    .cl-li {
+      background: #0077b5;
+      color: #fff;
+      border-color: #005f8d;
+    }
+
+    .cl-cf {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--navy);
+      border-color: var(--border);
+    }
+
+    .cl-lc {
+      background: #f87c1a;
+      color: #fff;
+      border-color: #d46010;
+    }
+
+    /* Perry easter egg */
+    .perry-corner {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 900;
+      width: 70px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+    }
+
+    .perry-corner:hover {
+      transform: scale(1.15) rotate(-5deg);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--sky);
+      color: var(--navy);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-top: 2px solid var(--orange);
+    }
+
+    footer span {
+      color: var(--orange);
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:900px) {
+      .hero-panel {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1.5rem;
+      }
+
+      .hero-right {
+        width: 100%;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .edu-card {
+        grid-template-columns: 1fr;
+      }
+
+      .edu-left {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .por-card {
+        grid-template-columns: 1fr;
+      }
+
+      .proj-section-flex {
+        flex-direction: column;
+      }
+
+      .proj-evil-panel {
+        width: 100%;
+        position: static;
+      }
+
+      .proj-evil-img {
+        max-width: 240px;
+        margin: 20px auto 0;
+      }
+
+      .proj-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #navbar {
+        padding: 0 1.2rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .stat-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:600px) {
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 4.5rem 1.2rem;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .reveal {
+        transition: none;
+      }
+
+      .hero-chars {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Ferb banner at very top -->
+  <div class="ferb-banner">⚒ FERB, I KNOW WHAT WE'RE GONNA CODE TODAY ⚒</div>
+
+  <!-- NAV -->
+  <nav id="navbar" style="top:32px">
+    <a href="#hero" class="nav-logo">
+      <div style="display:flex;flex-direction:column;line-height:1.1;">
+        <span class="logo-codewith">Code with</span>
+        <span style="font-family:'Fredoka One',cursive;font-size:1.25rem;color:#e83a00;line-height:1;">Phineas <span
+            style="font-size:0.7rem;color:#e83a00;font-family:'Nunito',sans-serif;font-weight:900;">and</span>
+          Ferb</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#coding">Coding</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#por">POR</a></li>
+      <li><a href="#certs">Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" style="padding-top:96px">
+    <div class="hero-city-bg"></div>
+    <div class="hero-sky-overlay"></div>
+
+    <div class="hero-panel">
+      <div class="hero-left reveal">
+        <div class="hero-top-label">B.Tech ECE · IIITA · Class of 2028</div>
+        <div class="hero-tagline">"Another day, another invention."</div>
+        <h1 class="hero-title">
+          Hi, I'm<br>
+          <span class="orange">Abhijeet</span>
+        </h1>
+        <p class="hero-sub">
+          Building chess engines, ML systems, and everything in between —
+          because every day in Danville is too short to sit still.
+        </p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn btn-primary">⚗️ See My Projects</a>
+          <a href="#coding" class="btn btn-ghost">♟️ Coding Profiles</a>
+        </div>
+      </div>
+
+      <div class="hero-right reveal">
+        <img class="hero-chars" src="/Users/abhijeetsharma/Desktop/Personal_Portfolio/Code_withP&F.jpeg"
+          alt="Phineas, Ferb and Perry in the backyard" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-scene-wrap"></div>
+    <div class="section-inner">
+      <div class="about-grid">
+
+        <div class="about-img-panel reveal">
+          <img src="/Users/abhijeetsharma/Desktop/Personal_Portfolio/Phineas.jpeg" alt="The gang in class" />
+        </div>
+
+        <div class="about-text reveal">
+          <div class="s-label">📋 Origin Story</div>
+          <h2 class="s-title">Who is <em>Abhijeet</em><span class="dot">.</span></h2>
+          <p>
+            I'm <strong>Abhijeet Sharma</strong> — a B.Tech ECE student at <strong>IIITA</strong> with a 8.13 CGPA. Like
+            any good day in Danville, I wake up with a plan and a whiteboard full of ideas — except mine tend to involve
+            bitboards and cosine similarity instead of roller coasters.
+          </p>
+          <p>
+            From C++ chess engines with alpha-beta pruning to ML recommendation pipelines — I build things that are
+            fast, clever, and ship before lunch.
+          </p>
+          <p>
+            I'm also a Senior Member of Sarasva (IIITA's Literary Society), where I've organized events like TEDx-IIITA
+            and MUN-IIITA. Even Perry would be impressed.
+          </p>
+
+          <div class="about-tags">
+            <span class="tag tag-o">C++ Systems</span>
+            <span class="tag tag-t">Machine Learning</span>
+            <span class="tag tag-o">Chess AI</span>
+            <span class="tag tag-t">FastAPI</span>
+            <span class="tag tag-g">Competitive Programming</span>
+            <span class="tag tag-o">ECE @ IIITA</span>
+          </div>
+
+          <div class="stat-row">
+            <div class="stat-box">
+              <div class="stat-num">8.13</div>
+              <div class="stat-lbl">CGPA</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">400+</div>
+              <div class="stat-lbl">Problems Solved</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">Top 0.6%</div>
+              <div class="stat-lbl">JEE 2024</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">1583</div>
+              <div class="stat-lbl">CodeChef</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">Pupil</div>
+              <div class="stat-lbl">Codeforces</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">100+</div>
+              <div class="stat-lbl">Problems of Graphs and DP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-inner">
+      <div class="s-label reveal">⚗️ The Blueprint Board</div>
+      <h2 class="s-title reveal">Projects<span class="dot">.</span></h2>
+      <p class="s-desc reveal">Every morning starts with a good idea. Here's what made it off the whiteboard.</p>
+
+      <div class="proj-section-flex">
+        <div class="proj-grid">
+          <div class="proj-card reveal">
+            <div class="proj-top-banner banner-chess"></div>
+            <div class="proj-header">
+              <span class="proj-type pt-chess">⚫ Game AI / Systems</span>
+              <div class="proj-links">
+                <a href="https://github.com/Abhijeet1815/GrandMaster-Ferb" target="_blank" title="View on GitHub"
+                  rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;">
+                  <svg width="20" height="20" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"
+                    style="fill:currentColor;">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-name-row">
+                <img src="Grandmaster_ferb.png" alt="GrandMaster Ferb logo" class="proj-logo-inline" />
+                <h3 class="proj-name">GrandMaster Ferb</h3>
+              </div>
+              <div class="proj-tagline">High-Performance Chess Engine · C++ · Web UI</div>
+              <ul class="proj-bullets">
+                <li>Engineered the engine core in C++ using Bitboards, Alpha-Beta pruning, and Negamax search for rapid
+                  move generation.</li>
+                <li>Implemented UCI protocol for GUI integration; validated move accuracy through Perft testing
+                  frameworks.</li>
+                <li>Built an interactive Web UI with Vanilla JS, HTML &amp; CSS for real-time move feedback and dynamic
+                  commentary.</li>
+              </ul>
+              <div class="tech-row">
+                <span class="chip">C++</span><span class="chip">Bitboards</span><span class="chip">Alpha-Beta</span>
+                <span class="chip">Negamax</span><span class="chip">UCI Protocol</span><span
+                  class="chip">JavaScript</span><span class="chip">HTML/CSS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card reveal">
+            <div class="proj-top-banner banner-ml"></div>
+            <div class="proj-header">
+              <span class="proj-type pt-ml">🤖 Machine Learning</span>
+              <div class="proj-links">
+                <a href="https://github.com/Abhijeet1815/couch-critic-ferb" target="_blank" title="View on GitHub"
+                  rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;">
+                  <svg width="20" height="20" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"
+                    style="fill:currentColor;">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-name-row">
+                <img src="Couch-Critic.png" alt="Couch-Critic Ferb logo" class="proj-logo-inline" />
+                <h3 class="proj-name">Couch-Critic Ferb</h3>
+              </div>
+              <div class="proj-tagline">Content-Based ML Recommendation System · Python · FastAPI</div>
+              <ul class="proj-bullets">
+                <li>Built a content-based movie recommender using Pandas, NLTK, and Scikit-Learn with Cosine Similarity
+                  on
+                  5000+ movies.</li>
+                <li>Architected an async FastAPI backend for real-time recommendations, fetching live metadata via TMDB
+                  API with httpx.</li>
+                <li>Integrated the ML pipeline into a frontend delivering tailored suggestions with sub-second latency.
+                </li>
+              </ul>
+              <div class="tech-row">
+                <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Scikit-Learn</span>
+                <span class="chip">Pandas</span><span class="chip">NLTK</span><span class="chip">Cosine
+                  Similarity</span><span class="chip">TMDB API</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evil Inc. Sidebar -->
+        <div class="proj-evil-panel reveal">
+          <div class="proj-evil-bubble">Doofenshmirtz's Evil Incorporated!</div>
+          <img src="Doofenshmirtz_Evil_Inc..jpeg" alt="Doofenshmirtz Evil Inc." class="proj-evil-img" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-inner">
+      <div class="s-label reveal">🔧 The Toolbox</div>
+      <h2 class="s-title reveal">Skills<span class="dot">.</span></h2>
+      <p class="s-desc reveal">Every great build needs the right tools. Here's what's in the shed.</p>
+      <div class="skills-grid">
+        <div class="skill-cat reveal">
+          <div class="sc-head">
+            <div class="sc-icon">💻</div>
+            <div class="sc-name">Languages</div>
+          </div>
+          <div class="sc-chips"><span class="sc-chip">C</span><span class="sc-chip">C++</span><span
+              class="sc-chip">Python</span><span class="sc-chip">JavaScript</span><span class="sc-chip">HTML</span><span
+              class="sc-chip">CSS</span></div>
+        </div>
+        <div class="skill-cat reveal">
+          <div class="sc-head">
+            <div class="sc-icon">🛠️</div>
+            <div class="sc-name">Developer Tools</div>
+          </div>
+          <div class="sc-chips"><span class="sc-chip">Git</span><span class="sc-chip">GitHub</span><span
+              class="sc-chip">VSCode</span><span class="sc-chip">PyCharm</span></div>
+        </div>
+        <div class="skill-cat reveal">
+          <div class="sc-head">
+            <div class="sc-icon">📦</div>
+            <div class="sc-name">Frameworks & Libraries</div>
+          </div>
+          <div class="sc-chips"><span class="sc-chip">FastAPI</span><span class="sc-chip">Pandas</span><span
+              class="sc-chip">Scikit-Learn</span><span class="sc-chip">NumPy</span><span
+              class="sc-chip">TensorFlow</span><span class="sc-chip">Keras</span><span
+              class="sc-chip">PyTorch</span><span class="sc-chip">NLTK</span></div>
+        </div>
+        <div class="skill-cat reveal">
+          <div class="sc-head">
+            <div class="sc-icon">🧠</div>
+            <div class="sc-name">Machine Learning</div>
+          </div>
+          <div class="sc-chips"><span class="sc-chip">Regression</span><span class="sc-chip">Classification</span><span
+              class="sc-chip">CNN</span><span class="sc-chip">RNN</span><span class="sc-chip">KNN</span><span
+              class="sc-chip">Clustering</span><span class="sc-chip">NLP</span><span class="sc-chip">Matplotlib</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <div class="sc-head">
+            <div class="sc-icon">🤖</div>
+            <div class="sc-name">AI Tools</div>
+          </div>
+          <div class="sc-chips"><span class="sc-chip">ChatGPT</span><span class="sc-chip">Claude</span><span
+              class="sc-chip">Gemini</span><span class="sc-chip">GitHub Copilot</span><span
+              class="sc-chip">Cursor</span></div>
+        </div>
+        <div class="skill-cat reveal">
+          <div class="sc-head">
+            <div class="sc-icon">♟️</div>
+            <div class="sc-name">Domain Expertise</div>
+          </div>
+          <div class="sc-chips"><span class="sc-chip">Game Engine Design</span><span class="sc-chip">REST API
+              Design</span><span class="sc-chip">Competitive Programming</span><span class="sc-chip">Bitwise
+              Optimization</span><span class="sc-chip">DSA</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CODING PROFILES -->
+  <section id="coding">
+    <div class="section-inner">
+      <div class="s-label reveal">📈 The Scoreboard</div>
+      <h2 class="s-title reveal">Coding Profiles<span class="dot">.</span></h2>
+      <p class="s-desc reveal">Where the algorithm contests happen and the ratings keep climbing.</p>
+
+      <div style="display:flex;gap:2.5rem;align-items:flex-start;">
+        <div class="coding-grid" style="flex:1;">
+          <!-- Codeforces -->
+          <div class="coding-card reveal">
+            <div class="coding-top-stripe stripe-cf"></div>
+            <div class="coding-body">
+              <div class="coding-profile-row">
+                <div
+                  style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#1a90ff,#0d5cc7);display:grid;place-items:center;font-weight:900;color:#fff;font-size:1rem;border:2px solid #1a90ff;flex-shrink:0;">
+                  CF</div>
+                <div>
+                  <div class="coding-handle">abhijeet.sharma</div>
+                  <div class="coding-rank rank-cf">Pupil</div>
+                </div>
+              </div>
+              <div class="prog-label"><span>Pupil Tier</span><span>Climbing</span></div>
+              <div class="prog-bar">
+                <div class="prog-fill fill-cf" style="width:60%"></div>
+              </div>
+              <div class="prog-sub">Pupil → Specialist → Expert</div>
+              <div class="coding-stats">
+                <div class="cs-item">
+                  <div class="cs-lbl">Rank</div>
+                  <div class="cs-val">Pupil</div>
+                </div>
+                <div class="cs-item">
+                  <div class="cs-lbl">Problems</div>
+                  <div class="cs-val">100+</div>
+                </div>
+                <div class="cs-item">
+                  <div class="cs-lbl">Rating</div>
+                  <div class="cs-val">1238</div>
+                </div>
+              </div>
+              <a href="https://codeforces.com/profile/abhijeet.sharma" target="_blank" class="coding-btn cbtn-cf">View
+                Profile ↗</a>
+            </div>
+          </div>
+
+          <!-- CodeChef -->
+          <div class="coding-card reveal">
+            <div class="coding-top-stripe stripe-cc"></div>
+            <div class="coding-body">
+              <div class="coding-profile-row">
+                <div
+                  style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#e5b800);display:grid;place-items:center;font-weight:900;color:#333;font-size:1rem;border:2px solid #FFD700;flex-shrink:0;">
+                  CC</div>
+                <div>
+                  <div class="coding-handle">abhisharma25</div>
+                  <div class="coding-rank rank-cc">⭐⭐ 2-Star</div>
+                </div>
+              </div>
+              <div class="prog-label"><span>2-Star</span><span>★★</span></div>
+              <div class="prog-bar">
+                <div class="prog-fill fill-cc" style="width:40%"></div>
+              </div>
+              <div class="prog-sub">★★ → ★★★ next milestone</div>
+              <div class="coding-stats">
+                <div class="cs-item">
+                  <div class="cs-lbl">Stars</div>
+                  <div class="cs-val">⭐⭐</div>
+                </div>
+                <div class="cs-item">
+                  <div class="cs-lbl">Rating</div>
+                  <div class="cs-val">1538</div>
+                </div>
+                <div class="cs-item">
+                  <div class="cs-lbl">Status</div>
+                  <div class="cs-val" style="font-size:0.9rem">Active</div>
+                </div>
+              </div>
+              <a href="https://www.codechef.com/users/abhisharma25" target="_blank" class="coding-btn cbtn-cc">View
+                Profile ↗</a>
+            </div>
+          </div>
+
+          <!-- LeetCode -->
+          <div class="coding-card reveal">
+            <div class="coding-top-stripe stripe-lc"></div>
+            <div class="coding-body">
+              <div class="coding-profile-row">
+                <div
+                  style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#f87c1a,#d46010);display:grid;place-items:center;font-weight:900;color:#fff;font-size:1rem;border:2px solid #f87c1a;flex-shrink:0;">
+                  LC</div>
+                <div>
+                  <div class="coding-handle">ferb01</div>
+                  <div class="coding-rank rank-lc">Active Solver</div>
+                </div>
+              </div>
+              <div class="prog-label"><span>Problems Solved</span><span>100+</span></div>
+              <div class="prog-bar">
+                <div class="prog-fill fill-lc" style="width:55%"></div>
+              </div>
+              <div class="prog-sub">Easy → Medium → Hard grind</div>
+              <div class="coding-stats">
+                <div class="cs-item">
+                  <div class="cs-lbl">Solved</div>
+                  <div class="cs-val">100+</div>
+                </div>
+                <div class="cs-item">
+                  <div class="cs-lbl">Focus</div>
+                  <div class="cs-val" style="font-size:0.9rem">DSA</div>
+                </div>
+              </div>
+              <a href="https://leetcode.com/u/ferb01/" target="_blank" class="coding-btn cbtn-lc">View Profile ↗</a>
+            </div>
+          </div>
+
+          <!-- GitHub -->
+          <div class="coding-card reveal">
+            <div class="coding-top-stripe stripe-gh"></div>
+            <div class="coding-body">
+              <div class="coding-profile-row">
+                <div
+                  style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#333,#111);display:grid;place-items:center;font-weight:900;color:#fff;font-size:1rem;border:2px solid #444;flex-shrink:0;">
+                  GH</div>
+                <div>
+                  <div class="coding-handle">Abhijeet1815</div>
+                  <div class="coding-rank rank-gh">Builder 🏗️</div>
+                </div>
+              </div>
+              <div class="prog-label"><span>Public Repos</span><span>10</span></div>
+              <div class="prog-bar">
+                <div class="prog-fill fill-gh" style="width:40%"></div>
+              </div>
+              <div class="prog-sub">More inventions shipping soon</div>
+              <div class="coding-stats">
+                <div class="cs-item">
+                  <div class="cs-lbl">Repos</div>
+                  <div class="cs-val">10</div>
+                </div>
+                <div class="cs-item">
+                  <div class="cs-lbl">Followers</div>
+                  <div class="cs-val">4</div>
+                </div>
+              </div>
+              <a href="https://github.com/Abhijeet1815" target="_blank" class="coding-btn cbtn-gh">View Profile ↗</a>
+            </div>
+          </div>
+        </div><!-- /coding-grid -->
+        <div class="doof-panel reveal"
+          style="flex-shrink:0;width:260px;position:sticky;top:90px;align-self:flex-start;">
+          <img src="Doofenshmirtz.jpeg" alt="Doofenshmirtz with his latest inator"
+            style="width:100%;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.2));border-radius:16px;" />
+          <div
+            style="margin-top:0.8rem;background:rgba(123,45,139,0.08);border:1.5px solid rgba(123,45,139,0.2);border-radius:12px;padding:0.8rem 1rem;font-size:0.82rem;color:#5a4070;font-weight:700;text-align:center;font-family:'Fredoka One',cursive;">
+            "I too have ratings, Perry the Platypus!"
+          </div>
+        </div>
+      </div><!-- /flex wrapper -->
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="section-inner">
+      <div class="s-label reveal">🏆 Trophy Shelf</div>
+      <h2 class="s-title reveal">Achievements<span class="dot">.</span></h2>
+      <p class="s-desc reveal">Even in Danville, some things deserve a plaque on the wall.</p>
+      <div class="ach-list">
+        <div class="ach-card reveal">
+          <div class="ach-icon">🎯</div>
+          <div class="ach-content">
+            <h3>AIR 10040 in JEE Main 2024 — Top 0.6%</h3>
+            <p>Ranked in the top 0.6% among over 1.5 million candidates nationwide. This secured admission to IIITA, one
+              of India's premier technical institutions.</p>
+          </div>
+        </div>
+        <div class="ach-card reveal">
+          <div class="ach-icon">♟️</div>
+          <div class="ach-content">
+            <h3>Pupil on Codeforces · 2★ on CodeChef · 100+ on LeetCode</h3>
+            <p>Active competitive programmer across platforms: <a href="https://codeforces.com/profile/abhijeet.sharma"
+                target="_blank">Codeforces</a>, <a href="https://www.codechef.com/users/abhisharma25"
+                target="_blank">CodeChef</a>, and <a href="https://leetcode.com/u/ferb01/" target="_blank">LeetCode</a>.
+            </p>
+          </div>
+        </div>
+        <div class="ach-card reveal">
+          <div class="ach-icon">💯</div>
+          <div class="ach-content">
+            <h3>400+ Problems Solved Across All Platforms</h3>
+            <p>Consistent grind across Codeforces, CodeChef, LeetCode, and GFG — covering graph algorithms, dynamic
+              programming, data structures, and competitive math.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-inner">
+      <div class="s-label reveal">🎓 The Academy</div>
+      <h2 class="s-title reveal">Education<span class="dot">.</span></h2>
+      <p class="s-desc reveal">Where the blueprints get drawn and the theorems get proved.</p>
+      <div class="edu-card reveal">
+        <div class="edu-left">
+          <div class="edu-institute">Indian Institute of Information Technology, Allahabad</div>
+          <div class="edu-degree">Bachelor of Technology in Electronics & Communication Engineering</div>
+          <div class="edu-meta">
+            <div class="edu-meta-item"><span>CGPA</span><strong>8.13</strong></div>
+            <div class="edu-meta-item"><span>Duration</span><strong style="font-size:1.05rem">2024–2028</strong></div>
+          </div>
+          <div class="about-tags" style="margin-bottom:0">
+            <span class="tag tag-o">ECE</span><span class="tag tag-t">IIITA</span><span class="tag tag-g">Active since
+              Aug 2024</span>
+          </div>
+        </div>
+        <div class="edu-right">
+          <h4>📚 Core Subjects</h4>
+          <div class="subject-item">
+            <div class="subject-header"><span>Data Structures & Algorithms</span><span
+                style="color:var(--orange)">Core</span></div>
+            <div class="subject-bar">
+              <div class="subject-fill" style="width:92%"></div>
+            </div>
+          </div>
+          <div class="subject-item">
+            <div class="subject-header"><span>Object Oriented Programming</span><span
+                style="color:var(--orange)">Strong</span></div>
+            <div class="subject-bar">
+              <div class="subject-fill" style="width:88%"></div>
+            </div>
+          </div>
+          <div class="subject-item">
+            <div class="subject-header"><span>Digital Electronics</span><span style="color:var(--orange)">Strong</span>
+            </div>
+            <div class="subject-bar">
+              <div class="subject-fill" style="width:84%"></div>
+            </div>
+          </div>
+          <div class="subject-item">
+            <div class="subject-header"><span>Linear Algebra & Calculus</span><span
+                style="color:var(--orange)">Strong</span></div>
+            <div class="subject-bar">
+              <div class="subject-fill" style="width:85%"></div>
+            </div>
+          </div>
+          <div class="subject-item">
+            <div class="subject-header"><span>Machine Learning (Self-study)</span><span
+                style="color:var(--orange)">Applied</span></div>
+            <div class="subject-bar">
+              <div class="subject-fill" style="width:80%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR -->
+  <section id="por">
+    <div class="section-inner">
+      <div class="s-label reveal">🎙️ Leadership</div>
+      <h2 class="s-title reveal">Position of Responsibility<span class="dot">.</span></h2>
+      <p class="s-desc reveal">Building things extends beyond code — it means building communities too.</p>
+      <div class="por-card reveal">
+        <div class="por-left">
+          <div class="por-role">Senior Member</div>
+          <div class="por-org">Sarasva — Literary Society, IIITA</div>
+          <div class="por-date">Aug 2025 – Present</div>
+          <br>
+          <div class="about-tags" style="margin:0">
+            <span class="tag tag-t">Leadership</span><span class="tag tag-o">Events</span><span
+              class="tag tag-g">Mentoring</span>
+          </div>
+        </div>
+        <div class="por-right">
+          <h4>Key Contributions</h4>
+          <ul>
+            <li>Orchestrated flagship institutional events including <strong>TEDx-IIITA</strong> and
+              <strong>MUN-IIITA</strong>, coordinating logistics, outreach, and execution for large audiences.
+            </li>
+            <li>Fostered a collaborative peer-learning culture and actively mentored junior members in skills and soft
+              leadership.</li>
+            <li>Earned accelerated promotion to Senior Member for consistent organizational initiative beyond the usual
+              timeline.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certs">
+    <div class="section-inner">
+      <div class="s-label reveal">📜 Credentials</div>
+      <h2 class="s-title reveal">Certificates<span class="dot">.</span></h2>
+      <p class="s-desc reveal">The blueprints come with proof of work.</p>
+      <div class="certs-grid">
+        <div class="cert-card reveal">
+          <div class="cert-icon">🎓</div>
+          <div class="cert-info">
+            <a href="https://www.coursera.org/account/accomplishments/verify/NTF8THYDO0EV" target="_blank">Supervised
+              Machine Learning: Regression and Classification</a>
+            <div class="cert-meta">Stanford Online · Coursera · Jan 2025</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-icon">🧠</div>
+          <div class="cert-info">
+            <a href="https://www.coursera.org/account/accomplishments/verify/BP314TF7P8U2" target="_blank">Advanced
+              Learning Algorithms</a>
+            <div class="cert-meta">Stanford Online · Coursera · Feb 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-overlay"></div>
+    <div class="section-inner contact-inner">
+      <div class="s-label reveal">📡 Open Channel</div>
+      <h2 class="s-title reveal">Let's Build Something<span class="dot">.</span></h2>
+      <p class="s-desc reveal">Got a project idea, a collab, or just want to compare ratings? Every great invention
+        starts with a conversation.</p>
+      <div class="contact-links reveal">
+        <a href="mailto:iec2024022@iiita.ac.in" class="cl cl-email">📧 Email Me</a>
+        <a href="https://github.com/Abhijeet1815" target="_blank" class="cl cl-gh">🐙 GitHub</a>
+        <a href="https://linkedin.com/in/abhijeet-sharma-68a716321" target="_blank" class="cl cl-li">💼 LinkedIn</a>
+        <a href="https://codeforces.com/profile/abhijeet.sharma" target="_blank" class="cl cl-cf">♟️ Codeforces</a>
+        <a href="https://leetcode.com/u/ferb01/" target="_blank" class="cl cl-lc">⚡ LeetCode</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Built in Danville, deployed everywhere · <span>Abhijeet Sharma</span> · IIITA · 2025
+  </footer>
+
+  <!-- Perry fixed easter egg -->
+  <img class="perry-corner"
+    src="data:image/webp;base64,UklGRlIbAABXRUJQVlA4WAoAAAAQAAAAlwAAygAAQUxQSAYKAAABoEZb27E3ut/3Q2y7qZmOyklt22PXtm3btm3b6bRRPU2Taezk43v/+Pw895vfETEBwGhkn3oeUBYNf4Clrzb3CBLKGu4n0NSYsrONR9liIVrWPx8VUYboUGwFIqYuqiSUEfyfo63pi6LKBlPQjp+Ge5YBKqTaA6VHrRWytwDtXLIuVObCU+yFGN9WlLUh6MDiuZ4y5nzXEYhnK1tSBNdq2am3l4zULXEMvm5mIlYcdTlFY5DwoKd8zEJH5/4kCLW2ZqPF+bLhdM9hWDx5ejZamfe1XFQvcJzNG+TiV2Q+JUQmtrCH/eXB5QkHu+ShXC4HCV6y0N7IQfHXsvAn8thfFrZzsVoOxLNcnBBkwOsdF8luMuD/mYsvETLwXSkXhoZq9+ivv7EY7SJS1Eziwnj3ZVKmznJmwuHhNRXktEQiC07Xo+YPKhAPUzOXjk3ULKBjJilutQc+I8PQigrBuXK/LXFFSGeiDwVKv4Z/b4/Ll5DUWcC5Iqz+j8sufNIjuSnluVG6RtXpNPnA3XQN0jwSuPTpOnfTxcR0vRHpPu/OR2cjOlDS6YwEvK4CfLq3Gzp27ORtV67aennL4rGju39TczN/GS2AYs9aq7jL7wX0KmM3JJcg7zm9gd7wfaXI/9sWQG/tJ0jg/RpAb/Az5F+33Q8InoH8f/lTCQQr7nJnvBADJCtu8pY61BWInsyXdmclIDvoIVeJXkB41N5SjvIrUwbK2Hn3skt1OiMPmhjSAEAd9W2zRgd4wN7Umf2Li2Gy0JyLJbJQq5CHs7Lgk8LDNYUcuMXxkBJAlsK13FfdR4yZsWrVqlVvecgKJUnwjZ18Oj5DZ0SONfXpUUT/dui9FvnvRowQ+tOZTAlJ/JUUVcP1KUjmKkI8f7pYgoRupkPcgbSeEskI+5+YRFcy/N4R89qNDJhHTEY5OjxmfSwu0dmkLcl58aSUC31dOkAIrFo19teB/0xbMN903vB//v6pYdVoF1XPOB4M9QlxZCMDB9hbFqrl8zBJFjzf8jBFFlyTeNgoC+JZHq4LcgCbeLgtysJqHp46y8JvPGSEy0I3HgqiZaGVkYPCSrIQncOBvqUDVGq3yJqm1YJd1Aq+QjI5wJ/sIvg26DZv64O4+C8a0+KUl3Hnl49sFe3Mjd8HEjzrDD/8Tod2zXqwbkAFkQvxKg9DrBN8Oq5NKEWHZp/8rZzIHpznYY017k1WvzUggxn72rgxt4+HA5Y8Bj/TIqu6Z0ODGZvEk3IlMi19nF9FYGkYD2cEc2MNbCFi1voYgZ0/ePjXzUzPEuQwd1NFZmJ1HHzyMamViny+7cFKTQ0vvjeR1/ymjNQo4eCzP4C4DPntykjQJw5K2gN013A0ghGnOA4wvVtYIvJb2oQR9XMeMOcecnxcwYjiKhdcZzUAVjfKzJs2wOwSeblZCdhdLCe69d7A8GAZKRikApb7ycfblgKw7HFbNi5UBrZHoEzqlnsB25XTZCJroBLYFjajPL5sCqw3KZYF6VwksO50AeVQu9QNmO+pl4OcnxXAvPsDlMH474HDnyQZOBENHHo8RvJLZ7gDjz8j+Z97i8Cj+2PybtUGPvtKxBk2BwCfTteR9pIZKuC0pZa2nL4icCocQdKzOgO3MXmkfWwB/C5ByhO/An5DPljxqISc5LYx7b9TMabsv37nyl8CAH5By48a5ZHz+lOpQTOJFaFSt67VPSFWg4iY2EFxwVJ6Hd/35Ji9pmTDaWYWSoXxUxskm2DGkDwL+p9A/Yik3B+BzdlGNPvushnUShY2K0C8Q9HLhsCm/we0d1IY0HQoAhh1uWMvXR8AEK6QUzLZDZit/cpOR1QAADuo+dxJAIaDZvwn2SErBkwXEpPbFBgP+f2m3qY5YHYaMZf8/f39PQSGAJz7fLDhXRhNmrS0tP9fndw74o9f6wSLDvLpNX/n7kVdA6GLDaOAJqs1qQebCY5o/UJCRJTezd9vXXwAfYhYPMQB5dPQvoa+YHESafg53H4NtHY6prb0Iz2SRmNFRjn7uZ+S7JJZGyz3pOdF0/oD1j3KMiJi6VzBfuDRfdLyK7feFdtwEKxsaODPqNXqrDKucAJwiu44afLAGBU4WBD9aoxKtGqiNfX5K/j7+9gWA+amWEJptTMwHXjMCn0rUqaD2frxllBa68QUVMm0dEhNyVk3cxA0I1lnDnEaW8JpC2cCgJCUqmCld5Pxj8wVNGIK9prRLPIEq78u5UvbD2z0PWcGT4osub4w0Q0UwfroTL42iLbAtwVmciqwVK/YZLMCbIz4wlVcINgsnjSjb86Q6ggiYlFtsNX9DU8FLcCO3YwmhlYMtdCavPW1yY2r2WBP90cmORUZ2oim/4dQcs3LLtDqjYQ5owSGjptJs61zIT/ZdcHOQV37VBaBuQuiDcrhecjvZCBypon0C1ivnmNAfu95UxF+VUL9emfrXFYZkd/8xkCmZ5exHdVgtctqCTleAnQ7r5SQ45fBdCnnG5HnfWq6JhiQa2mZmqrOBci5cZkTTbVSkXtpsYoi37tIoDRdoEdcgSQW96WneykNmBVLTXgSUvkinBZhI9K5W01Ki2JCDAMp8biLlKbFENLRSAqedqZjJdIq/UGG+j4x+L48FS6J1OCyMssrj7JKaQwRqtvkGNsSAevIwRFU/OwIQ35qkvVvCvUGFoZSUTnHHqU5Ty8unvRbg2qhrtZ71KxT/69JS659KDA4wtCMCsUZ25J/rRfpAo4U/St2HL7nWbZkp+KaVEAPo03zgU3X6G5L72Ub7ZDkQYbrLVv0LRgxVUUusMNuoLN1iQ1pwQwB9LFDL0KEpTYkezPVQm9Tkh8h4H3NuqxQpvze2TQJSK353qr8qkzBblviA2mBVjnWYFe2xtig6wvU/lxizSi2JtqwUkEO/F5sxVa29lt3wwcIVYfX6z9s3f796VbsU7IkXrfqbWWgUhEzeNvDDA3aWnyzGUOBKdZ8aQZE+vY4UoR2zmrNTpUCK7I6AonquovfGNH+iWHMtDFYyu4MBArlBt0qQcdOZ0IVFttllc5S2tYlEzvU9VPy5N9hdwY6fCULfnvS9WizJuXyms6+nAjjPurR8c8rMuB9Gu1teLOsvgsPFTPR8blLg4DBeehIzYPRlRXMNciQHJW2ooYIDFbMdAgi5pweECKwJUT33HDqXLrddM8GhgvAZNVcRyFKKds7ebNkvk6ifTJ2tHIHVoWxhQ4zPaRkDqo+s82YMD5aBIaFpjd0DORVYg+CZmVYJz3/1QdYd2l3psBB+oRVnhwAVG7dulXfM5KZ1KHewKOq5tSnGntpt7RrHesFHLvtR8TMNbWAW9dG6z9K9tCMUQDvftuvjqggANfBfz7U2/Tf7yLwr1QB/26drhks6HOysr9siIIyo8svH8x87hsZGRmqgLJkxNh4Pea2gbKoZ/tZbYB5VlA4ICYRAAAwSwCdASqYAMsAPpFAm0klo6KhKDXb4LASCWZu40MiXd6b+3dl5kT1P5e+0hYX7P+NP6/yixs+2TmO+aP+j9Tv6K/5fuFfpr+N/Yu/cb1E/0P/L/tp7x3+s/ZL3jf431Cv651HfoAeXN7L/7kfst7X2aq/178XvC3/S/k52T/vH285M/UncaR68iPkXqEYkf6Ls8dd/2voBezH230KZmuQBwMNAD+d/2r9g/ZFz4PWPsF/zH+x9X395PY//XhrHSFPWG96CXBWIK61OYZ9h2g+ehgRvbce0gDYkCKNpYrB1hxGDFwsmjqWJuF3GBy8arsCzk0ZJz/WJfmbMPXSEEw8W8rE5ZI1rUmjbU7N+HI1wRKfmWVt7pQMUQ+7ANuogDf3UNCovPA4/iGTmgFxDnkEPsFLT4Bt17Hdn9yfeiiZH3rP79Npv6SHsexXtYAeH4yguA/oVIEq9NsEhtADp5YUhWC4V7TiJdIdv8+t0W8bH9dBRT/6fYQn+WkW3A0f59zRYFtT48obe/xTLUvnczcmPrYCWiDEt/cE724ji6Wpm5JEg5a2MvEqqthnhT3OXZUdKwLG1sSku8aYT+qccxVEHx8LKeaSki5+yykxBLb1rmD6O/nJtzWiBoc0uFkaogg5sxGLOKGuO4ubHs+6tK2ypzsnhXkN1g20Lp7mqcdDV9vVG/YTNzE9h8N/VJki9Pdlrs7/D4BRvMZ+vJ3u53pKHpXrcSpRYI+dkJ/jA9sgWSlUvgiFefusWfYuSGF+6ItfZ4EzCFQvRSY//hR4evDXYrANvXku3IR18ioz9ccX7K5gAP79NnKl90zRIc7qWVPhZJ2JQKmUeXy7V++WqruADFEHZhicXPLrCq1mS+9SK6a0m74K3Bd9fM21M8EcJdO/BqKTC3exWm9dv8AiexB5539ilawsH91+IbtB/gJn8j7AJwBJggRTWtUqu/xyK9tz17P/5NWTBs6Q4/0t+8EzcojSOpPoSp1b//QX/RPdiHZ1QRLsVEazO98rztlK1/v9hSCdXAgMfHU+lOB7ezoFotlmzbrEmhCQ/NCNcU8c00mlnxdwNUmCiCAIRohED72Ki5LCdZmkdHc191a/YIi6Exwb36zGHuznaB9KG9WVh8k/sgIHlLZO9X97aA4DkWhiHTv+mowM8iVKAourhhzTCr/pDM3yX/PCSfDRJun/E7EHLh2d5v9/9uG/NVL1+trfaGw+7qtCWbTWVsQc3sRpJkF5sFw7UGc+7h2aX5TMcS2k0vDb8dv9FaExiPlsWeZHG8uVYHtjfmdsLcyUwn1/DaeiURRsCs0fuYzBwlWSV1D8yJX37u6RkjVNu65VztuuJH8SEtku9XSaK1MB4ygWY/gg6sUXnnWzVpM7Eo48anIBzlX7PZ7onekHo08yQ0oLM2XJVDBspcVkqe7fzCcJvFkOz7w+1VLXaqAzI66YdBu0DeQh5d48ZRW7+uKFKOUQgWiTaHMaXAcke94sPjkN3llDSv18XaEfTGPHyNGmRdgtBxQW4+pW7JuwUfkKqqdIDCIigukvRkdgjNGXxfm6XEiVc2WZ5rhdGZdTBp5zQCE6rzmUEKZSVLHPUVMWW2ZCB0YG79f4Ja7A82uZwzBAV+JyFwnA7avgNhxf3ux+wzK4y+aTdB89rlcOp167Zy0Lg2cQMGQ7EBG7++75b8ULmhT2e0FMY3Shg5H6hMi7wbQUJOztNXMfhvc/Xyb1cCFrz0FQwW+poL+2BN3TE9UYTW6AQVObRjBDmMIcM1yoaDnq3k0X2llAX0tTjvROWfMleSztV5XN4ikE+e2AMJzqKNF3zL2wmDTloGhw4r2JOBvbctBbbjynNwOdaV2sp3+/mIDV5LEFM0Nj1wQJOxK5kac7x7ymk8LT3qt7aRlirRePcOYbR7rRls7ihb5NsqfYzvy+iFjDSMtfNFepOS+LYJ9L6p8CSJh5+AV2PEBFsyFZXdyOuGLaaQUbkMvZEtAppnPXh/y/9HUYqummkK5ioECID5/6yO3D9b1sRlFmrWVUS8Ap/L3oAUpb8z7P9ziHzUcqpkBDNMhL6fHbIvY2/iUM4okjKkeGl9dxyplK0H8/USYb8TJY1bHxxYTlXRYPL9pB0ZC2A5UxqSSAbsGHbomz+tkxM46MsCMlxho6JVcuAVnsMFb8K7L5F+f0ce9XlRCWnSiJ3KE3fJoPJTrLAe0X9nJ14uKgokzDct/+YYdaIcNNH121Ek0rkkWOFb8qaKgKWuOxk0YTANdnQKcNmgInPSlWrnIhHR72mngehlzC4VnCdcbdIO+mL9a6Df/nNX7jcGBzJaeN0/vjLcyWDomNOwOqm/kIXEGOjtnHOrEaHETfC7Jll1C+E3LeH4cMuICXdKGHTDL+MLzxcidHGyrYCzM+/IzHri/IM2AbVH5IO8b7p/C2ltFzjFqmBV5ofbjn/l+SVwgMjl7/GzKiHenNv8+y+4mnzqy/+xOFYBKg8Bx9OT/cbc9haYLHayaugr/VlBVhJzIBtqQYz3pp1YKc19zgJv9dLxN+fyWgHGoHeFZflZsrgIemQy70+Vofln3r+AZlaJoz1c04vDhmpYPr8CDShjL6O4CYXmA2fp/mFxb5C/JWfTO+fdt8wvNgSfglcttvwsi7D8PV1pspOb4LnjeuvtsD08ebn184uZTEb5jysO8IPqOes7NaA/hVC2M9tnwcbwFmS5OGe6QzqTpIOy7AUKbwI3/GbeGKkeK/gsVcnV/v/pcycjf0lstAAqSBUZpDxgLbcPGrDSzqvg0QiDXJQHAsGVJPV4LBASSpDOYoASP3p0jQSGgDoFNNaZ9w1aWZnPlOzIBmHdV+pMVP3ChNmtvE3NB2ztouQGw4z/Jcw59HSs6Ri7Y1XmG7IQ9njS5bUnUvxkq3aCBEPMuIAVQvr69Xsu+fxHTDlVvwgAPqZHIL9Q+5YK914ygZOcleLFQtB9AMi3yP2hdh72UYiGzJNu2ZQb60Ikl9DHlxcNilBdNEjLcwiLlyOGz8VcshO0eCyly8t0lp5N5NAu/MCeXQ6wuKZCUuPa0KUxERW/SkHqs5H75DU8AoHdpvCJ+AxpY8UPQcgV9HNyqkJtohAkrxEQXNe57Wbi8aH4ZsHkkZ+TNYKMzBOGb2ysqgTyWlhOa+OVFmC/ncDt3+Utk0eptLMh+d1I/vF4UendpFSuhG3GkMjIfXJcBP/nvlWl7MjJQ7H0O0q+j8JJ0mR1OjnJx7vuOnRk1FSGBGcTWrnb4/57QcRzyZPnlt1Tzt75i8+2bBCTtn6KiE53BFfbAjrOCgVmD0oURmPTGRl0roIV/CGAIgv/qzhLedhf2/dNv27JYvh+h90BazemgRlsPWKDwMuv2/nFWcV7S0o1D6Qb3VAJlJjIT0769hadWTsdFEvyE7laDqhQVsgnJJ2z/swltWCV6SgAzqZV7/ynwx0e1XDX5K3olT60oSZbTEcYH+X82vjldyQzNKfSu8h1FLYst5EIoOyrrNwNoSVDhT3d491M3GdBYRpJvLbcc2WURmyyCPm6w2U85aqKCD0UUKTbMYHy6egg5pOSHiybQgS2QTM4YN5Hyu2sqJZz7FGh69pwN6j0PNr2MwdOoPLLBbnOHQzPU/YDqGf4vQGodKCe5e3dwsn+w0un9Hfey9M/3QSHG7yUekM90swWgnEpyLIMfgRNqPsaRLtcQ+4PqY+UrxZ9VEG39Z/vyWeFYy3V7qw9eL4hQKz+nZLrwvilgxweCSkG6tEpPdsJcsfHHFBV2QqnQmx3aqAE4KxIWB9eaFRcut67f/6TO9v9ToiYCQN4NPJh2/uFl7V6GU4eXbnSYaCXYaK/LPK6NdEh1iw5te/GcADQzO5SKvnrdzDhTyie1YouBOAjYPFusKVwkL91LJ/zr55xcj+R3/t/+Ln/+Vk3mOyqgWnnxQwdxMciWf7Xx0fZnDBdw7Sut5Fbc+lyPc7EMbGtEbCTP1JHXE43p6m9OYJN9ZPoSrMk+hnqdYWqMkFNzRmUsVM0JBKvX6/xnv8jwyrOEglTmuFG3kR0mcUg3EcqrmOffVZo3QGAIdRfZoI0x9OjeLLUGDmCvh3mD59pmUCiyJnj+kSkl9K/fh1IH1PY46oRR+895xUl9E1vDBipj/EAzpoeoGenmAuPvfaksCynZI+XDgH1Ya/+hF1O8jvV/yBPMIQv7v8CADxe/gFlAP0cnYx4H4tHdIhhnPZJe9JeryFqUbDPUqfzG6/dK/7um3DutIEgSNX0EJXHS4rekotGMIkdqMK2DctQPDnVAQNzHqRGBPTwbYgZDz41qiomGDZR6+bZkF6EEdFOrg2xKDQdbg52IaN++9OaUNOUTK47QUQCE18Rww53jBXblk+G/JXsWkbkeXmE0VxiklFJ/QgcsHiZeznnZ+dEOzC5IaaSoTBJNO9vsN16aLVZxNxq+8Ql2Oy5Z5/UElyZk23Q2IKWRWkmjd9R/FMrMxa3mBqfAH9k4eduDwN3kP++/8FAQ97voJZa1MCQuAY31VSyOPPxT5UnX9Su6ADpQ+8dxcTb7MV+nymYC24FCeTJu13OGlakb3ZAHJgleY088DSJMOAQvlWBR9mv+MD/ckjnLGhJBK87zCyYbu5EPcULVDJ4K0OFj9JUe8oEMOJUSbmuRUtSiK0SEgb50G/B0sMPOGTGfeCCz9mU/6nRGP8UNz4uMXMqW1j8t3l5iFk5rJP6KvubxPxs87BcRK8Utr+hpAvZxDuRAhgMkU8drI79gR9+7t2/tZtw/CVi6v7h2xR+guPgm8YKBA7HJXNarTOemHATGQqhWpf/IFDtdGJq+4bB4t013751T9LDtKNzA0D6ZVGgNbT0H/pv3+gK2l0jgUd+3ZVd/SNkWUhWckyBRbHqfhbttb0pw6Zd7yUHzdQ+vRqN+hCAEtG6rpsoWt49tqUmI6Svt9TyDO3FcPjiUdC4Va2bp4i3UWFt2KWH79mSvqmk4eRw24s89z6HeHMRZNZXH3IWbecz0cpJHDL1pgzRlBUqTpdDiHVbTGD3MwzRufOybUN/m6SVglb1yEsKjN0HlEij9tQ+RXVGHD+1CQ16MMY5wAVdgjEmp62oQAf57xdimS3LWPVEUVltKBRP/JOr+AYRRLRcHjw3R9iMw9kiv4Lgl8p1zjx0L6A7xYRwWXxooHMqpapERC0ejMts52j81yBynKi8ZG4IdyT5bfpjE1UwsJ438pllsUC6Ncj++NQ7izjZU6guNmK+iLr8bVkHQVtMAZqffwL0Z2U+YCH7J4G+MxjTVHoukPkB2+MxBVlIiduHGSSAzM3uJUdZQwOQQw6m3q9p1TfL/z3EFJOjB8WmjG3CcJxtLdg1kmub4MJvmmOlAegtmfWE1X3Y/vT1tI02Mg4zx3nez0gpTT18xUc2il1I3GSta8M/Eg9ZlBc2vCJpzw1GrBVqCsejAv8s5OW/oUxqE/ShfwRFR0F7PPxsYJQHRQh6JIUfyztrEMjy2KVzEXoyvVyfluuSvX9eddxNzev9KEjJS0FeOT998NNOzGq3wEU8sYd6ChuRXDqDrYDkAtxAesEJSrq6MFe33mbZYI/Vubd4s4qUknWcY3bKy/CbK+Etlx6MEjFgZ2W6tNcG/4rjm3SOSwYe92chNbTPLLhnGw6xu4tcPVPR6nmMi+HQxEbsyMWCM1F7PH53Hqw/hJBE4kzUJF37y0WN/EMI+sFX/0r7YBIM+rQ2jNJJVT+NqBW63wLJ3snTMfnoJbahIwDnKHFMStVuNQqT4xoHGXgCNNuSRpLcA8Q9qBdb0FuclnfL+0kN2EC5xipULGmANb36AkuJ7EgmZMETqTy3ZHn9DY6OtOpXS1nMu1t/rtpOTpEgjAAAAA"
+    alt="Agent P" title="*Perry noises* 🎩" />
+
+  <script>
+    // Offset navbar for ferb banner
+    const navbar = document.getElementById('navbar');
+    const BANNER_H = 32;
+    window.addEventListener('scroll', () => {
+      navbar.style.top = window.scrollY > BANNER_H ? '0' : (BANNER_H - window.scrollY) + 'px';
+      navbar.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.15)' : 'none';
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      const siblings = [...el.parentElement.querySelectorAll(':scope > .reveal')];
+      const idx = siblings.indexOf(el);
+      if (idx > 0) el.style.transitionDelay = (idx * 0.1) + 's';
+      observer.observe(el);
+    });
+
+    // Active nav
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 90) current = s.id; });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--orange)' : '';
+      });
+    });
+
+    // Perry click easter egg
+    document.querySelector('.perry-corner').addEventListener('click', () => {
+      const q = ['*chatters*', 'On it, Major Monogram.', 'Curse you, Perry the Platypus!', 'Where does he go every day?'];
+      alert(q[Math.floor(Math.random() * q.length)]);
+    });
+  </script>
+</body>
+
+</html>
