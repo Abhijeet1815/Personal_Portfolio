@@ -6,4 +6,3 @@ Welcome to my personal portfolio! This repository contains the source code for m
 
 You can view the live version of my portfolio here: **[https://abhijeet1815.github.io/Personal_Portfolio/](https://abhijeet1815.github.io/Personal_Portfolio/)**
 
-*(Note: The link will be active once GitHub Pages is enabled in the repository settings.)*
