@@ -139,6 +139,8 @@
       border-radius: 6px;
       transform-origin: center center;
       filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+      will-change: transform;
+      transition: transform 0.05s linear;
     }
 
     #left-rollercoaster-cart img {
@@ -2643,7 +2645,7 @@
       <div class="about-grid">
 
         <div class="about-img-panel reveal">
-          <img src="./Phineas.jpeg" alt="The gang in class" />
+          <img loading="lazy" src="./Phineas.jpeg" alt="The gang in class" />
         </div>
 
         <div class="about-text reveal">
@@ -2749,7 +2751,7 @@
             </div>
             <div class="proj-body">
               <div class="proj-name-row">
-                <img src="Grandmaster_ferb.png" alt="GrandMaster Ferb logo" class="proj-logo-inline" />
+                <img loading="lazy" src="Grandmaster_ferb.png" alt="GrandMaster Ferb logo" class="proj-logo-inline" />
                 <h3 class="proj-name">GrandMaster Ferb</h3>
               </div>
               <div class="proj-tagline">High-Performance Chess Engine · C++ · Web UI</div>
@@ -2797,7 +2799,7 @@
             </div>
             <div class="proj-body">
               <div class="proj-name-row">
-                <img src="Couch-Critic.png" alt="Couch-Critic Ferb logo" class="proj-logo-inline" />
+                <img loading="lazy" src="Couch-Critic.png" alt="Couch-Critic Ferb logo" class="proj-logo-inline" />
                 <h3 class="proj-name">Couch-Critic Ferb</h3>
               </div>
               <div class="proj-tagline">Content-Based ML Recommendation System · Python · FastAPI</div>
@@ -2822,7 +2824,7 @@
         <!-- Evil Inc. Sidebar -->
         <div class="proj-evil-panel reveal">
           <div class="proj-evil-bubble">Doofenshmirtz's Evil Incorporated!</div>
-          <img src="Doofenshmirtz_Evil_Inc..jpeg" alt="Doofenshmirtz Evil Inc." class="proj-evil-img" />
+          <img loading="lazy" src="Doofenshmirtz_Evil_Inc..jpeg" alt="Doofenshmirtz Evil Inc." class="proj-evil-img" />
         </div>
       </div>
     </div>
@@ -3043,7 +3045,7 @@
         </div><!-- /coding-grid -->
         <div class="doof-panel reveal"
           style="flex-shrink:0;width:260px;position:sticky;top:90px;align-self:flex-start;">
-          <img src="Doofenshmirtz.jpeg" alt="Doofenshmirtz with his latest inator"
+          <img loading="lazy" src="Doofenshmirtz.jpeg" alt="Doofenshmirtz with his latest inator"
             style="width:100%;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.2));border-radius:16px;" />
           <div
             style="margin-top:0.8rem;background:rgba(123,45,139,0.08);border:1.5px solid rgba(123,45,139,0.2);border-radius:12px;padding:0.8rem 1rem;font-size:0.82rem;color:#5a4070;font-weight:700;text-align:center;font-family:'Fredoka One',cursive;">
@@ -3329,27 +3331,27 @@
                 <a href="https://abhijeetwrites.substack.com/p/i-need-some-time-to-be-myself" target="_blank"
                   class="poem-poster-link">
                   <div class="poem-poster-img-wrap">
-                    <img src="./poem1.jpg" alt="Poem 1: I need some time to be myself" class="poem-poster-img" />
+                    <img loading="lazy" src="./poem1.jpg" alt="Poem 1: I need some time to be myself" class="poem-poster-img" />
                   </div>
                   <div class="poem-poster-title">I need some time to be myself!</div>
                 </a>
                 <a href="https://abhijeetwrites.substack.com/p/if-only-i-could-write-better" target="_blank"
                   class="poem-poster-link">
                   <div class="poem-poster-img-wrap">
-                    <img src="./poem2.jpg" alt="Poem 2: If Only I could write better" class="poem-poster-img" />
+                    <img loading="lazy" src="./poem2.jpg" alt="Poem 2: If Only I could write better" class="poem-poster-img" />
                   </div>
                   <div class="poem-poster-title">If Only I could write better</div>
                 </a>
                 <a href="https://abhijeetwrites.substack.com/p/its-okay-to-be-misunderstood" target="_blank"
                   class="poem-poster-link">
                   <div class="poem-poster-img-wrap">
-                    <img src="./poem3.jpg" alt="Poem 3: It's ok to be misunderstood" class="poem-poster-img" />
+                    <img loading="lazy" src="./poem3.jpg" alt="Poem 3: It's ok to be misunderstood" class="poem-poster-img" />
                   </div>
                   <div class="poem-poster-title">It's ok to be misunderstood</div>
                 </a>
                 <a href="https://abhijeetwrites.substack.com/p/bad-touch" target="_blank" class="poem-poster-link">
                   <div class="poem-poster-img-wrap">
-                    <img src="./poem4.jpg" alt="Poem 4: Bad Touch!?" class="poem-poster-img" />
+                    <img loading="lazy" src="./poem4.jpg" alt="Poem 4: Bad Touch!?" class="poem-poster-img" />
                   </div>
                   <div class="poem-poster-title">Bad Touch!?</div>
                 </a>
@@ -3481,9 +3483,9 @@
           let angle = Math.atan2(ptNext.y - pt.y, ptNext.x - pt.x) * (180 / Math.PI);
           angle = angle - 90; // Adjust for vertical image orientation
 
-          leftCart.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-          leftCart.style.left = pt.x + 'px';
-          leftCart.style.top = pt.y + 'px';
+          leftCart.style.transform = `translate3d(${pt.x}px, ${pt.y}px, 0) translate(-50%, -50%) rotate(${angle}deg)`;
+          leftCart.style.left = '0px';
+          leftCart.style.top = '0px';
         }
       }
     }
@@ -3564,7 +3566,16 @@
         a.style.color = '';
       });
     }
-    window.addEventListener('scroll', updateNav, { passive: true });
+    let isScrolling = false;
+    window.addEventListener('scroll', () => {
+      if (!isScrolling) {
+        window.requestAnimationFrame(() => {
+          updateNav();
+          isScrolling = false;
+        });
+        isScrolling = true;
+      }
+    }, { passive: true });
     updateNav();
 
     // ====== HERO TAGLINE TYPEWRITER CLEANUP ======
@@ -3695,7 +3706,7 @@
       <path id="track-main" class="track-path" fill="none" stroke="transparent" stroke-width="1" />
     </svg>
     <div id="left-rollercoaster-cart">
-      <img src="./rollercoaster.png" alt="Rollercoaster Cart" />
+      <img loading="lazy" src="./rollercoaster.png" alt="Rollercoaster Cart" />
     </div>
   </div>
 </body>
